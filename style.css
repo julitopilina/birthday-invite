@@ -1,0 +1,510 @@
+:root {
+    --bg-color: #f2eee8;
+    --text-dark: #3b2a25;
+    --text-light: #7a6e67;
+    --accent-color: #8c7667;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: #d1c9c4; /* Darker background outside the container */
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.invitation-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--bg-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.panel {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Envelope Overlay Animation */
+.envelope-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: auto;
+    overflow: hidden;
+    background-color: #f4f1eb;
+}
+
+.top-flap-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    z-index: 2;
+    filter: drop-shadow(0px 5px 15px rgba(0,0,0,0.15));
+    transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.top-flap {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f1eb;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 15vh;
+}
+
+.bottom-flap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-color: #eeebe5;
+    clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 12vh;
+    transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.envelope-overlay.open .top-flap-wrapper {
+    transform: translateY(-100%);
+}
+
+.envelope-overlay.open .bottom-flap {
+    transform: translateY(100%);
+}
+
+.envelope-overlay.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3b2a25;
+    text-align: center;
+}
+
+.cursive-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 52px;
+    text-transform: none;
+    letter-spacing: 0;
+    display: block;
+    margin-top: -5px;
+    color: #3b2a25;
+}
+
+.wax-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    background: url("img/Gemini_Generated_Image_tkljdjtkljdjtklj-no-bg-preview (carve.photos).png") center/contain no-repeat;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    transition: opacity 0.5s ease, transform 0.2s ease;
+}
+
+.wax-seal:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.wax-seal span {
+    color: #e8e2db;
+    font-size: 16px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    opacity: 0.95;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.envelope-details {
+    width: 80%;
+    max-width: 300px;
+}
+
+.detail-line {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #7a6e67;
+    padding-bottom: 5px;
+}
+
+.detail-line .label {
+    font-size: 16px;
+    margin-right: 15px;
+    color: #3b2a25;
+}
+
+.detail-line .value.cursive {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 28px;
+    flex-grow: 1;
+    text-align: left;
+    color: #3b2a25;
+}
+
+/* Panel Timeline */
+.panel-timeline {
+    height: 800vh; /* scroll depth for 4 photos, much slower scroll */
+    position: relative;
+    padding: 0;
+    background-color: #1a1a1a;
+    width: 100%;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.timeline-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Will be managed by JS immediately */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Hardware acceleration for smoother fading */
+    transform: translateZ(0); 
+    will-change: clip-path, transform, filter, opacity;
+}
+
+.timeline-bg {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transform-origin: center center;
+    transition: transform 0.1s ease-out, filter 0.1s ease-out;
+}
+
+.timeline-bg::after {
+    /* Overlay to make numbers readable */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.timeline-bg.placeholder-bg {
+    background-color: #3b2a25;
+}
+
+.timeline-number {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-serif);
+    font-size: 150px;
+    color: #ffffff;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+}
+
+/* Remove step-10-content and white text styles */
+
+/* --- FINAL PART: NEW DESIGN (WHITE STYLE) --- */
+
+/* New Hero Screen */
+.new-hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a2e; /* dark blue/purple */
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #161625, #2c2c44); /* Placeholder for champagne glasses */
+    opacity: 0.8;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding-top: 10vh; /* To match reference */
+}
+
+.hero-date {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 60px;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* New White Details Section */
+.new-details {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #4a4a4a; /* dark grey text */
+}
+
+.section-heading {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    margin: 40px 0 15px;
+    color: #3b3b3b;
+}
+
+.section-heading.lowercase {
+    text-transform: lowercase;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.section-text {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.section-text.small {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.section-text.italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 18px;
+}
+
+/* Calendar Widget */
+.calendar-widget {
+    margin: 30px 0;
+    width: 90%;
+    max-width: 300px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.cal-header div {
+    flex: 1;
+    text-align: center;
+}
+
+.cal-days {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cal-day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-right: 1px solid #eee;
+}
+.cal-day:last-child {
+    border-right: none;
+}
+
+.day-num {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    color: #333;
+    line-height: 1;
+    margin-bottom: 5px;
+    z-index: 2;
+}
+
+.month {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: #666;
+}
+
+.cal-day.active .circle-outline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 60px;
+    height: 60px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Images with offset shadow */
+.image-with-shadow {
+    position: relative;
+    width: 80%;
+    max-width: 250px;
+    margin: 30px 0;
+}
+
+.image-with-shadow img,
+.band-placeholder {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.band-placeholder {
+    background-color: #f4f4f4;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 12px;
+}
+
+.shadow-box {
+    position: absolute;
+    top: 15px;
+    left: -15px;
+    width: 100%;
+    height: 100%;
+    background-color: #2c2c44; /* matches new theme dark blue */
+    z-index: 1;
+}
+
+.band-image .shadow-box {
+    top: 15px;
+    left: auto;
+    right: -15px; /* shadow on the other side for variety */
+}
+
+/* Buttons */
+.map-btn {
+    background: none;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 25px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #666;
+    margin: 20px 0;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+/* Host Image */
+.host-image {
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.host-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}

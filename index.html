@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на юбилей</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="invitation-container">
+
+    <!-- Envelope Overlay -->
+    <div class="envelope-overlay" id="envelope">
+        <div class="top-flap-wrapper">
+            <div class="envelope-flap top-flap">
+                <h1 class="title">ВАМ ПРИШЛО<br><span class="cursive-title">Приглашение!</span></h1>
+            </div>
+        </div>
+        <div class="envelope-flap bottom-flap">
+            <div class="envelope-details">
+                <div class="detail-line">
+                    <span class="label">Для:</span>
+                    <span class="value cursive">Родные и близкие</span>
+                </div>
+                <div class="detail-line">
+                    <span class="label">От:</span>
+                    <span class="value cursive">Алексея</span>
+                </div>
+            </div>
+        </div>
+        <div class="wax-seal" id="seal" onclick="openEnvelope()">
+            <span>НАЖМИТЕ<br>СЮДА</span>
+        </div>
+    </div>
+
+    <!-- Panel Timeline: Age Progression -->
+    <div class="panel-timeline" id="panel-timeline">
+        <div class="sticky-container">
+            <!-- 10 years -->
+            <div class="timeline-step" id="step-10">
+                <div class="timeline-bg" style="background-image: url('img/Gemini_Generated_Image_ya60ffya60ffya60.jpg');"></div>
+                <div class="timeline-number">10</div>
+            </div>
+            <!-- 20 years -->
+            <div class="timeline-step" id="step-20">
+                <div class="timeline-bg" style="background-image: url('img/Gemini_Generated_Image_9xm1wb9xm1wb9xm1.jpg');"></div>
+                <div class="timeline-number">20</div>
+            </div>
+            <!-- 30 years -->
+            <div class="timeline-step" id="step-30">
+                <div class="timeline-bg placeholder-bg"></div>
+                <div class="timeline-number">30</div>
+            </div>
+            <!-- 40 years -->
+            <div class="timeline-step" id="step-40">
+                <div class="timeline-bg placeholder-bg"></div>
+                <div class="timeline-number">40</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Part: New Design Hero Screen -->
+    <div class="panel new-hero" id="panel-hero">
+        <div class="hero-bg"></div> <!-- Champagne glasses placeholder / gradient -->
+        <div class="hero-content">
+            <div class="hero-date">21 | 02 | 2027</div>
+            <h1 class="hero-title">ЮБИЛЕЙ</h1>
+            <h2 class="hero-subtitle">50 ЛЕТ</h2>
+        </div>
+    </div>
+
+    <!-- Final Part: New Design White Section -->
+    <div class="panel new-details" id="panel-details">
+        
+        <h2 class="section-heading">Дорогие друзья!</h2>
+        <p class="section-text">
+            С радостью приглашаю вас<br>
+            на празднование моего юбилея!
+        </p>
+
+        <!-- Calendar Component -->
+        <div class="calendar-widget">
+            <div class="cal-header">
+                <div>пятница</div>
+                <div>суббота</div>
+                <div>воскресенье</div>
+            </div>
+            <div class="cal-days">
+                <div class="cal-day">
+                    <span class="day-num">19</span>
+                    <span class="month">февраля</span>
+                </div>
+                <div class="cal-day">
+                    <span class="day-num">20</span>
+                    <span class="month">февраля</span>
+                </div>
+                <div class="cal-day active">
+                    <div class="circle-outline"></div>
+                    <span class="day-num">21</span>
+                    <span class="month">февраля</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Место проведения</h2>
+        <p class="section-text">
+            Кафе-бар "Легенда",<br>
+            просп. Строителей, 58А, г. Пенза
+        </p>
+        
+        <!-- Image with offset shadow -->
+        <div class="image-with-shadow">
+            <div class="shadow-box"></div>
+            <img src="restaurant.jpg" alt="Ресторан">
+        </div>
+
+        <button class="map-btn">посмотреть на карте</button>
+
+        <h2 class="section-heading lowercase">сбор гостей<br>в 18:00</h2>
+
+        <h2 class="section-heading">Программа</h2>
+        <p class="section-text small">
+            За атмосферу и хорошее<br>настроение отвечает талантливый<br>ведущий Никита Данилов.
+        </p>
+        <p class="section-text small">
+            В программе вас ожидает<br>выступление кавер-группы "X-33",<br>которая подарит незабываемые<br>музыкальные моменты!
+        </p>
+
+        <div class="image-with-shadow band-image">
+            <div class="shadow-box"></div>
+            <div class="band-placeholder">Фото группы</div>
+        </div>
+
+        <h2 class="section-heading">Детали</h2>
+        <p class="section-text small">
+            Для желающих остаться на ночь<br>предусмотрены номера в гостинице<br>"Fillin", которые будут<br>забронированы за счет именинника.
+        </p>
+
+        <h2 class="section-heading">Жду встречи!</h2>
+        <p class="section-text italic">С уважением,<br>Алексей</p>
+
+        <div class="host-image">
+            <img src="man_whiskey.jpg" alt="Алексей">
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Инициализация при загрузке
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.style.overflow = 'hidden'; // Запрещаем скролл до открытия
+        const firstStep = document.getElementById('step-10');
+        if (firstStep) firstStep.style.opacity = 1;
+    });
+
+    function openEnvelope() {
+        const envelope = document.getElementById('envelope');
+        envelope.classList.add('open');
+        
+        // Разрешить скролл после открытия письма
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+            envelope.style.display = 'none';
+        }, 1500);
+    }
+
+    function submitForm() {
+        alert("Спасибо! Ваш ответ записан.");
+    }
+
+    // Timeline scroll logic
+    window.addEventListener('scroll', () => {
+        const timeline = document.getElementById('panel-timeline');
+        if (!timeline) return;
+        
+        const rect = timeline.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        let progress = 0;
+        const totalScrollable = timeline.offsetHeight - windowHeight;
+        
+        if (rect.top <= 0 && rect.bottom >= windowHeight) {
+            progress = Math.abs(rect.top) / totalScrollable;
+        } else if (rect.bottom < windowHeight) {
+            progress = 1;
+        } else if (rect.top > 0) {
+            progress = 0;
+        }
+
+        const steps = [
+            document.getElementById('step-10'),
+            document.getElementById('step-20'),
+            document.getElementById('step-30'),
+            document.getElementById('step-40')
+        ];
+        
+        if (!steps[0]) return;
+
+        steps.forEach((step, index) => {
+            const stepCenter = index * (1 / 3); 
+            const progressDiff = stepCenter - progress;
+            const rawNormalizedPos = progressDiff / (1 / 3); 
+            
+            // Плато - зона покоя для комфортного просмотра
+            const plateauSize = 0.2;
+            let normalizedPos = 0;
+            
+            if (rawNormalizedPos > 0) {
+                if (rawNormalizedPos < plateauSize) {
+                    normalizedPos = 0;
+                } else {
+                    normalizedPos = (rawNormalizedPos - plateauSize) / (1 - plateauSize);
+                }
+            } else {
+                if (rawNormalizedPos > -plateauSize) {
+                    normalizedPos = 0;
+                } else {
+                    normalizedPos = (rawNormalizedPos + plateauSize) / (1 - plateauSize);
+                }
+            }
+            
+            // Устанавливаем z-index, чтобы следующие слайды накладывались поверх
+            step.style.zIndex = index + 10;
+            step.style.opacity = 1;
+            
+            const bgElem = step.querySelector('.timeline-bg');
+            const numberElem = step.querySelector('.timeline-number');
+            
+            if (normalizedPos > 0) {
+                // Слайд ВЫЕЗЖАЕТ ПОВЕРХ (от 1.0 до 0.0)
+                let clipPercent = normalizedPos * 100;
+                step.style.clipPath = `inset(${clipPercent}% 0 0 0)`;
+                step.style.webkitClipPath = `inset(${clipPercent}% 0 0 0)`;
+                
+                if (bgElem) {
+                    const bgScale = 1.0 + (normalizedPos * 0.2); // Эффект прибытия (зум)
+                    bgElem.style.transform = `scale(${bgScale})`;
+                    bgElem.style.filter = 'none';
+                }
+                
+                if (numberElem) {
+                    step.style.perspective = '1000px';
+                    const numTranslateY = normalizedPos * 250; // Вылет снизу
+                    const numRotateX = normalizedPos * 60;     // 3D наклон
+                    const numScale = 1.0 - (normalizedPos * 0.4);
+                    
+                    numberElem.style.transform = `translateY(${numTranslateY}px) scale(${numScale}) rotateX(${numRotateX}deg)`;
+                    numberElem.style.opacity = 1 - normalizedPos;
+                }
+                
+            } else {
+                // Слайд В ЦЕНТРЕ ИЛИ УХОДИТ НАЗАД (от 0.0 до -1.0)
+                step.style.clipPath = `inset(0 0 0 0)`;
+                step.style.webkitClipPath = `inset(0 0 0 0)`;
+                
+                let pushBackProgress = -normalizedPos;
+                
+                // Убеждаемся, что последний слайд остается четким при переходе к приглашению
+                if (index === 3 && progress > 0.95) {
+                    pushBackProgress = 0;
+                }
+                
+                if (bgElem) {
+                    // Эффект отдаления и затемнения старого слайда
+                    const bgScale = 1.0 - (pushBackProgress * 0.1); 
+                    const bgTranslateY = -(pushBackProgress * 50); 
+                    const bgBlur = pushBackProgress * 15;
+                    
+                    bgElem.style.transform = `translateY(${bgTranslateY}px) scale(${bgScale})`;
+                    bgElem.style.filter = `blur(${bgBlur}px) brightness(${1 - pushBackProgress * 0.5})`;
+                }
+                
+                if (numberElem) {
+                    // Цифра плавно улетает вверх
+                    const numTranslateY = -(pushBackProgress * 300);
+                    const numOpacity = 1 - (pushBackProgress * 2);
+                    numberElem.style.transform = `translateY(${numTranslateY}px)`;
+                    numberElem.style.opacity = numOpacity < 0 ? 0 : numOpacity;
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
